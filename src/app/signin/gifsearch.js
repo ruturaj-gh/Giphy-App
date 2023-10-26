@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./GifSearch.css";
 
 function GifSearch() {
@@ -8,15 +8,21 @@ function GifSearch() {
   const [favorites, setFavorites] = useState([]);
   const [offset, setOffset] = useState(0);
 
-  const handleSearch = async (offset = 0) => {
-    setIsLoading(true);
-    const response = await fetch(
-      `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=7iHawNTo5S9UQtCBcqxCOVhxdscbOSgJ&limit=9&offset=${offset}`
-    );
-    const data = await response.json();
-    setGifs(data.data);
-    setIsLoading(false);
-  };
+  useEffect(() => {
+    const handleSearch = async () => {
+      setIsLoading(true);
+      const response = await fetch(
+        `https://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=GlVGYHkr3WSBnllca54iNt0yFbjz7L65&limit=9&offset=${offset}`
+      );
+      const data = await response.json();
+      setGifs(data.data);
+      setIsLoading(false);
+    };
+
+    if (searchTerm.length > 0) {
+      handleSearch();
+    }
+  }, [searchTerm, offset]);
 
   const handleAddFavorite = (gif) => {
     const index = favorites.findIndex((f) => f.id === gif.id);
@@ -35,12 +41,10 @@ function GifSearch() {
 
   const handleNext = () => {
     setOffset(offset + 9);
-    handleSearch(offset + 9);
   };
 
   const handlePrevious = () => {
     setOffset(Math.max(offset - 9, 0));
-    handleSearch(Math.max(offset - 9, 0));
   };
 
   return (
@@ -52,7 +56,6 @@ function GifSearch() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button onClick={() => handleSearch()}>Go</button>
       {isLoading && <div>Loading...</div>}
       <div className="gif-grid">
         {gifs.map((gif) => (
@@ -68,7 +71,9 @@ function GifSearch() {
         ))}
       </div>
       {offset > 0 && (
-        <button onClick={handlePrevious} id="previousbtn">Previous</button>
+        <button onClick={handlePrevious} id="previousbtn">
+          Previous
+        </button>
       )}
       {gifs.length === 9 && (
         <button onClick={handleNext}>Next</button>

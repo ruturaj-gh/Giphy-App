@@ -1,11 +1,31 @@
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+
+.gif-container {
+  background-color: white;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
 .gif-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
-  background-color: #f5f5f5;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 0.4rem;
+  size: 100%;
+  align-items: center;
+  background-color: #f5f5f5c6;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 5px;
+  margin: 50px 150px 50px 150px;
 }
+
 .gif-item .favorite {
   position: absolute;
   top: 0.5rem;
@@ -23,15 +43,16 @@
 .gif-item .favorite.active {
   color: gold;
 }
+
 .gif-item {
-  width: calc(100% / 3 - 1rem);
+  width: 300px; /* change this value */
+  height: 200px; /* change this value */
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   overflow: hidden;
   position: relative;
 }
-
 .gif-item:hover {
   transform: translateY(-0.25rem);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
@@ -61,7 +82,6 @@
 
 /* Search Bar Styles */
 input[type="text"] {
-  
   width: 30%;
   height: 2rem;
   margin: 70px 140px 40px 460px;
@@ -71,7 +91,6 @@ input[type="text"] {
   font-size: 1rem;
   text-align: center;
   margin-bottom: 1rem;
-  
   color: rgb(0, 0, 0);
 }
 
@@ -92,7 +111,8 @@ button {
 button:hover {
   background-image: linear-gradient(75deg, #00e0ff, #7000ff 48%, #ff6868);
 }
-.nextbutton{
+
+.nextbutton {
   width: 10%;
   height: 2rem;
   margin: 0px 10px 40px 630px;
@@ -104,7 +124,8 @@ button:hover {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-#previousbtn{
+
+#previousbtn {
   width: 10%;
   height: 2rem;
   margin: 0px 10px 40px 630px;
@@ -115,5 +136,4 @@ button:hover {
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
-
 }
